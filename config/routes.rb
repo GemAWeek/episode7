@@ -1,4 +1,9 @@
 GemaweekBase::Application.routes.draw do
+  resources :posts
+
+  match 'about', to: 'welcome#about'
+  match 'contact', to: 'welcome#contact'
+  get 'welcome/index'
   root to: "Welcome#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

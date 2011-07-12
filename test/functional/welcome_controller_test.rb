@@ -6,4 +6,8 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show all posts" do
+    get :index
+    assert_not_nil assigns(:posts)
+  end
 end
