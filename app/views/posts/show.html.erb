@@ -10,6 +10,9 @@
   <%= @post.body %>
 </p>
 
-
+<%= form_tag post_tweet_url do %>
+  <%= image_submit_tag 'TwitterButton01.png' %>
+  <%= hidden_field_tag 'post_id', @post.id %>
+<% end %>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

@@ -1,6 +1,6 @@
 GemaweekBase::Application.routes.draw do
   resources :posts
-
+  match 'post_tweet', to: 'posts#tweet'
   match 'about', to: 'welcome#about'
   match 'contact', to: 'welcome#contact'
   get 'welcome/index'

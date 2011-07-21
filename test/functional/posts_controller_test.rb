@@ -46,4 +46,9 @@ class PostsControllerTest < ActionController::TestCase
 
     assert_redirected_to posts_path
   end
+
+  test "should send a Tweet" do
+    post :tweet, :post_id => @post.id
+    assert_response :success
+  end
 end

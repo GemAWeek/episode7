@@ -1,4 +1,12 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show, :index]
+  def tweet
+    post = Post.find_by_id(params[:post_id])
+    client = Twitter::Client.new(:oauth_token => current_user.twitter_token,
+                                 :oauth_token_secret => current_user.twitter_secret)
+    client.update("New GemAWeek post by #{current_user.login} | #{post.short_url}")
+    redirect_to root_path, notice: "Tweet was successfully posted"
+  end
   # GET /posts
   # GET /posts.xml
   def index
@@ -41,7 +49,7 @@ class PostsController < ApplicationController
   # POST /posts.xml
   def create
     @post = Post.new(params[:post])
-
+    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
@@ -78,6 +86,14 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(posts_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  private
+  def authenticate_user!
+    unless current_user
+      flash[:alert] = "Please sign in."
+      redirect_to root_path
     end
   end
 end

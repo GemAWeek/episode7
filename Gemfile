@@ -8,7 +8,9 @@ gem 'rails', '3.0.9'
 gem 'sqlite3'
 gem 'jquery-rails', '~> 1.0.11'
 gem 'navigasmic'
-
+gem 'omnisocial', :git => 'git@github.com:icelab/omnisocial.git'
+gem 'bitly'
+gem 'twitter'
 group :test do
   gem 'turn'
   gem 'fabrication'
